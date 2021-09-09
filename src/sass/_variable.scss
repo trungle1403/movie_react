@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600&display=swap');
+
+:root {
+    --bg-color: #06121E;
+    --bg-light-color: #091C2D;
+    
+    --blue-color:#276cda;
+    --red-color: #c41f20;
+    --pink-color: #dd003f;
+    --green-color:#3ec46d;
+    --text-main-color: #dbdbdb;
+    --text-second-color:#a2a6a9;
+    --silver-gray-color: #7a7a7a;
+    --silver-color: #b5b5b5;
+    --white-color: #fff;
+    --black-color:#0a0a0b;
+    --black-gray-color:#0f0f10;
+    --gray-color:#181a1b;
+    --box-shadow: rgba(149, 157, 165, 0.2) 0px 7px 24px;
+
+    --biggest-fz: 40px;
+    --bigger-fz: 24px;
+    --big-fz: 18px;
+    --normal-fz: 15px;
+    --small-fz: 14px;    
+    --smaller-fz: 12px;  
+    
+    --primary-font: 'Poppins', sans-serif;
+    --second-font:  'Open Sans', sans-serif;
+
+    --header-height: 70px;
+}

@@ -1,0 +1,77 @@
+.select-react {
+    color: var(--black-color);
+}
+
+.filter-list {
+    font-size: var(--small-fz);
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr .3fr;
+    gap: 20px 30px;
+    background: var(--bg-light-color);
+    padding: 15px;
+    border-radius: 4px;
+}
+.filter-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px 0;
+}
+
+.filter-label {
+    font-weight: 600;
+    color: var(--white-color);
+    font-size: var(--normal-fz);
+}
+.filter-display {
+    display: flex;
+    gap: 0 10px;
+    height: 100%;
+    .btn-display {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        border: 1px solid var(--silver-color);
+        border-radius: 4px;
+        transition: .3s linear;
+
+        &:hover {
+            border: 1px solid var(--green-color);
+        }
+        &.active {
+            border: 1px solid var(--green-color);
+        }
+        
+    }
+    .btn-display i{
+        color: var(--white-color);
+        font-size: var(--bigger-fz);
+        vertical-align: middle;
+        transition: inherit;
+    }
+}
+@media screen and (max-width: 1024px) {
+    .filter-list{
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+@media screen and (max-width: 768px) {
+    .filter-list{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 568px) {
+    .filter-list{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 432px) {
+    .filter-list{
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,32 @@
+.btn-custom {
+    display: inline-block;
+    padding: 8px 12px;
+    width: fit-content;
+    text-align: center;
+    color: var(--white-color);
+    border-radius: 4px;
+    font-size: var(--normal-fz);
+}
+.btn-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    i {
+        font-size: var(--normal-fz);
+        vertical-align: middle;
+    }
+}
+.btn-blue {
+    background: var(--blue-color);
+}
+
+.btn-red {
+    background: var(--red-color);
+}
+
+.btn-green {
+    background: var(--green-color);
+}
+.btn-pink {
+    background: var(--green-color);
+}

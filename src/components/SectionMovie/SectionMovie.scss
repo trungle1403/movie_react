@@ -1,0 +1,12 @@
+.section-movie {
+    margin-bottom: 1.5rem;
+    .section-title {
+        text-transform: uppercase;
+        font-size: var(--bigger-fz);
+        color: #b1a21e !important;
+        text-shadow: 1px 1px 1px #1a1a1a;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid var(--bg-light-color);
+    }
+}

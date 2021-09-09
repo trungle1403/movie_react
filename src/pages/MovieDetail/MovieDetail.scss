@@ -1,0 +1,118 @@
+.detail {
+    .backdrop {
+        width: 100%;
+        height: 600px;
+        background:url(https://image.tmdb.org/t/p/original/orGlr1vHTgbDkGJPwuBjd8ncVjQ.jpg);
+        background-size: cover;
+        background-position: 50% 0;
+        background-repeat: no-repeat;
+        position: relative;
+        &:before {
+            position: absolute;
+            content: "";
+            width: 100%;
+            top: 0;
+            bottom: 0;
+            background-color: rgba(2,13,24,.75);
+        }
+    }
+    &-container {
+        margin-top: -300px !important;
+        grid-template-columns: .8fr 3fr;
+        gap: 0 30px;
+    }
+    &-media {
+        display: flex;
+        flex-direction: column;
+        gap: 30px 0;
+        align-items: center;
+        text-align: center;
+    }
+    &-img {
+        width: 100%;
+        object-fit: cover;
+    }
+    .btn-view {
+        background: var(--pink-color);
+        font-size: var(--big-fz);
+        width: 100%;
+        padding: 12px 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0 5px;
+        text-transform: uppercase;
+        &:hover {
+            opacity: 0.8;
+        }
+        i {
+            font-size: var(--bigger-fz);
+        }
+    }
+
+    &-content {
+        margin-top: 20px;
+    }
+    &-title {
+        font-size: var(--biggest-fz);
+        font-weight: 500;
+    }
+    &-subtitle {
+        font-size: var(--bigger-fz);
+        color: var(--text-second-color);
+        font-weight: 500;
+        margin-bottom: 1rem;
+    }
+    &-time {
+        margin-bottom: 1rem;
+    }
+
+    &-votes {
+        display: flex;
+        align-items: center;
+        gap: 0 10px;
+    }
+    &-logo svg{
+        width: 40px;
+        height: 40px;
+        vertical-align: middle;
+    }
+    &-score {
+        font-weight: bold;
+    }
+    &-vote {
+        font-size: var(--small-fz);
+        color: var(--text-second-color);
+        margin-top: 2px;
+        margin-left: -5px;
+    }
+    &-category {
+        display: flex;
+        align-items: center;
+        gap: 0 15px;
+
+        &-link {
+            font-size: var(--smaller-fz);
+            border: 1px solid var(--white-color);
+            border-radius: 30px;
+            padding: 7px 12px;
+            &:hover {
+                color: var(--blue-color);
+                background:  var(--white-color);
+            }
+        }
+    }
+    .btn-collection {
+        padding: 10px 15px;
+        cursor: pointer;
+        background: var(--green-color);
+        display: inline-flex;
+        align-items: center;
+        i {
+            font-size: var(--big-fz);
+        }
+    }
+    .text {
+        margin-bottom: 1rem;
+    }
+}
