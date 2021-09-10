@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState }  from 'react'
 import Header from '../Header/Header'
 // import Footer from '../Footer/Footer'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
@@ -8,7 +8,6 @@ import Movie from '../../pages/Movie/Movie'
 import Show from '../../pages/Show/Show'
 import MovieDetail from '../../pages/MovieDetail/MovieDetail'
 import Search from '../../pages/Search/Search'
-import { useState } from 'react/cjs/react.development'
 
 const Layout = () => {
     const [movieId, setMovieId] = useState();
