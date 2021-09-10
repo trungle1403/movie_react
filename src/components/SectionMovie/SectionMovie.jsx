@@ -8,11 +8,11 @@ const SectionMovie = props => {
     return (
         <section className="section-movie">
             <div className="container">
-                {
-                    title ? <h2 className="section-title">{title}</h2> : ''
-                }
-                <Poster display={display} type={type} movieData={movieData} number={number} getMovie={getMovie} />
+            {
+                title ? <h2 className="section-title">{title}</h2> : ''
+            }
             </div>
+            <Poster display={display} type={type} movieData={movieData} number={number} getMovie={getMovie} />
         </section>
     )
 }

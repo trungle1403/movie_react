@@ -16,8 +16,8 @@ const mainNav = [
         path: '/type/show'
     },
     {
-        display: 'Tất cả phim',
-        path: '/all'
+        display: 'Tìm kiếm',
+        path: '/search'
     },
 ]
 const Header = () => {
@@ -35,7 +35,7 @@ const Header = () => {
     //header sticky
     const headerRef = useRef(null)
     useEffect(() => {
-        window.addEventListener('scroll', (e) =>{
+        window.addEventListener('scroll', () =>{
             if( document.body.scrollTop  > 100 || document.documentElement.scrollTop > 80) {
                 headerRef.current.classList.add('sticky');
             }else{
@@ -67,6 +67,7 @@ const Header = () => {
                         <li className="nav-item nav-close" onClick={() => navToggle()} >
                             <i class='bx bxs-chevrons-left'></i>
                         </li>
+                        <Link to='/login' className='btn-custom nav-login'>Đăng nhập</Link>
                     </ul>
                 </div>
                 <div className="nav-action">

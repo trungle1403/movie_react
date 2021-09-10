@@ -2,7 +2,6 @@ import React, { useState , useEffect } from 'react'
 import PropTypes from 'prop-types'
 import './Pagination.scss'
 
-import { useHistory } from "react-router-dom";
 
 const Pagination = props => {
     const {page, totalPage, onPageChange} = props
@@ -14,8 +13,6 @@ const Pagination = props => {
         setPageCurrent(page)
     }, [page])
 
-
-    let history = useHistory();
     const handlePageChange = (newPage) => {
         // console.log(newPage)
         if(!onPageChange) return;
@@ -24,7 +21,6 @@ const Pagination = props => {
         setPageCurrent(newPage)
         
         document.documentElement.scrollTop = 0
-
     }
     
     // 10 4 - 1 = 3 > 4 => yes
@@ -79,29 +75,36 @@ const Pagination = props => {
             )
         }
     }
-    return (
-        <div className="container">
-            <section className="pagination">
-                <ul className="pagination-list">
-                    {listPage}
-                </ul>
-                <div className="pagination-action">
-                    <button className="pagination-prev pagination-item"
-                        disabled= { page <= 1}
-                        onClick= { () => handlePageChange(page - 1) }
-                    >
-                        Prev
-                    </button>
-                    <button className="pagination-next pagination-item"
-                        disabled= { page >= totalPage}
-                        onClick={ () => handlePageChange(page + 1) }
-                    >
-                        Next
-                    </button>
-                </div>
-            </section>
-        </div>
-    )
+    if(totalPage != null){
+        return (
+            <div className="container">
+                <section className="pagination">
+                    <ul className="pagination-list">
+                        {listPage}
+                    </ul>
+                    <div className="pagination-action">
+                        <button className="pagination-prev pagination-item"
+                            disabled= { page <= 1}
+                            onClick= { () => handlePageChange(page - 1) }
+                        >
+                            Prev
+                        </button>
+                        <button className="pagination-next pagination-item"
+                            disabled= { page >= totalPage}
+                            onClick={ () => handlePageChange(page + 1) }
+                        >
+                            Next
+                        </button>
+                    </div>
+                </section>
+            </div>
+        )
+    }else{
+        return(
+            <></>
+        )
+    }
+    
 }
 
 Pagination.propTypes = {

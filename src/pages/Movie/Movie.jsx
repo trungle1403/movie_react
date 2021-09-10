@@ -15,7 +15,7 @@ import getSortParams from '../../utils/getSortParams'
 import getRuntimeParams from '../../utils/getRuntimeParams'
 
 //lib
-// import queryString from 'query-string'
+import queryString from 'query-string'
 
 const createParams = (obj, history, params) => {
     //delete item null
@@ -25,7 +25,7 @@ const createParams = (obj, history, params) => {
         }
     }
     //set params or not
-    // history.push(`?${queryString.stringify(params)}`);
+    history.push(`?${queryString.stringify(params)}`);
 }
 const Movie = props => {
     const {getMovie} = props
@@ -90,11 +90,11 @@ const Movie = props => {
     })
     const [runTimeOtherBy, setrunTimeOtherBy] = useState("lte")
     // const paramsString = queryString.stringify(filters)
-    const paramsString = `page=${filters.page}&with_genres=${filters.with_genres}&with_original_language=${filters.with_original_language}&primary_release_year=${filters.primary_release_year}&with_runtime.${runTimeOtherBy}=${filters.with_runtime}&sort_by=${filters.sort_by}`
     // console.log(paramsString)
     useEffect(() => {
         const fetchMovie = async (specify) => {
             try {
+                const paramsString = `page=${filters.page}&with_genres=${filters.with_genres}&with_original_language=${filters.with_original_language}&primary_release_year=${filters.primary_release_year}&with_runtime.${runTimeOtherBy}=${filters.with_runtime}&sort_by=${filters.sort_by}`
                 const URL = `https://api.themoviedb.org/3/discover/${specify}?api_key=5761f00d4efd80b92ba2496773204780&language=vi&${paramsString}`;
                 const response = await fetch(URL)
                 const data = await response.json()
@@ -113,7 +113,7 @@ const Movie = props => {
             }
         }
         fetchMovie("movie")
-    }, [filters])
+    }, [filters,runTimeOtherBy])
 
     const handlePageChange = (newPage) => {
         // console.log('phim le: ', newPage)

@@ -2,18 +2,11 @@ import React, { useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
 import Helmet from '../../components/Helmet'
 import './MovieDetail.scss'
-import { Link, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const MovieDetail = props => {
     const {id, type} = props
-    // const id = 1
-    // const type = 'movie'
-    // const  {slug} = useParams()
-    // console.log(slug)
-
     const [movie, setMovie] = useState({})
-
-
     
     useEffect(() => {
         const fetchMovieItem = async () => {
@@ -32,13 +25,13 @@ const MovieDetail = props => {
             }
         }
         fetchMovieItem();
-    },[])
+    },[id, type])
     return (
         <Helmet>
             <section className="detail">
-                <div className="backdrop" style={{
-                    backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
-                }}></div>
+            <div className="backdrop" style={{
+                backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
+            }}></div>
                 <div className=" container detail-container grid">
                     <div className="detail-media">
                         <div className="detail-media-img">
@@ -84,8 +77,12 @@ const MovieDetail = props => {
 }
 
 MovieDetail.propTypes = {
-    type: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
+    type: PropTypes.string,
+    id: PropTypes.number,
+}
+MovieDetail.propTypes = {
+    type: null,
+    id: null,
 }
 
 export default MovieDetail

@@ -11,7 +11,7 @@ import SortSelectData from './SortSelectData'
 
 const SelectFilter = props => {
     const {onGenreChange, onCountryChange, onYearChange, onRuntimeChange, onSortChange,
-                getYear, getCountry, getGenre, getSort, getRuntime, display, onDisplayChange} = props
+                getYear, getCountry, getGenre, getSort, getRuntime, onDisplayChange} = props
     
                 // console.log(onDisplayChange)
     const optionGenre = GenreSelectData()
@@ -128,7 +128,7 @@ const SelectFilter = props => {
                         Sắp xếp:
                     </label>
                     <Select className="select-react" 
-                        // defaultValue={{ label: '--- Tất cả ---', value: "" }} 
+                        defaultValue={optionSort[sortSelected]} 
                         options={optionSort} 
                         onChange={handleSortChange}
                         value={optionSort[sortSelected]}
@@ -139,11 +139,11 @@ const SelectFilter = props => {
                         Hiển thị:
                     </label>
                     <div className="filter-display">
-                        <div className="btn-display active" ref={gridRef}
+                        <div className="btn-display active" ref={gridRef} title="GRID LAYOUT"
                             onClick={() => handleDisplayChange("grid")}>
                             <i class='bx bx-grid-alt'></i> 
                         </div>
-                        <div className="btn-display" ref={listRef}
+                        <div className="btn-display" ref={listRef} title="LIST LAYOUT"
                             onClick={() => handleDisplayChange("list")}>
                             <i class='bx bx-list-ul' ></i>
                         </div>
@@ -160,12 +160,11 @@ SelectFilter.propTypes = {
     onYearChange: PropTypes.func,
     onRuntimeChange: PropTypes.func,
     onSortChange: PropTypes.func,
-    getYear: PropTypes.string,
+    getYear: PropTypes.number,
     getCountry: PropTypes.string,
     getGenre: PropTypes.string,
     getSort: PropTypes.string,
     getRuntime: PropTypes.string,
-    display: PropTypes.string,
     onDisplayChange: PropTypes.func,
 }
 SelectFilter.defaultProps = {
@@ -179,7 +178,6 @@ SelectFilter.defaultProps = {
     getGenre: null,
     getSort: null,
     getRuntime: null,
-    display: null,
     onDisplayChange: null,
 }
 

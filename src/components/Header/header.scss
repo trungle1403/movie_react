@@ -29,6 +29,10 @@
             display: flex;
             align-items: center;
             gap: var(--gapx);
+
+            .nav-login {
+                display: none;
+            }
         }
 
         &-item {
@@ -69,13 +73,15 @@
             display: flex;
             align-items: center;
             gap: var(--gapx);
+            i {
+                font-size: var(--big-fz);
+            }
         }
         &-search {
             display: flex;
             align-items: center;
-            i {
-                font-size: var(--big-fz);
-            }
+            display: none;
+            
         }
         &-login {
             background: var(--red-color);
@@ -109,6 +115,9 @@
                     opacity: 1;
                     visibility: visible;
                 }
+                .nav-login {
+                    display: block;
+                }
             }
             &-overlay {
                 position: fixed;
@@ -135,6 +144,12 @@
             &-close {
                 position: absolute;
                 top: 20px;left: 20px;
+            }
+            &-search {
+                display: flex;
+            }
+            &-login {
+                display: none;
             }
         }
     }

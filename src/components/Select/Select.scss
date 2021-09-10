@@ -34,15 +34,15 @@
         cursor: pointer;
         width: 40px;
         height: 40px;
-        border: 1px solid var(--silver-color);
+        border: 2px solid var(--silver-color);
         border-radius: 4px;
         transition: .3s linear;
 
         &:hover {
-            border: 1px solid var(--green-color);
+            border: 2px solid var(--green-color);
         }
         &.active {
-            border: 1px solid var(--green-color);
+            border: 2px solid var(--green-color);
         }
         
     }
