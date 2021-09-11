@@ -5,6 +5,7 @@ import Helmet from '../../components/Helmet'
 import SectionMovie from '../../components/SectionMovie/SectionMovie'
 import Pagination from '../../components/Pagination/Pagination'
 import SelectFilter from '../../components/Select/SelectFilter'
+import Loading from '../../components/Loading/Loading'
 
 //data
 import getPageParams from '../../utils/getPageParams'
@@ -46,7 +47,6 @@ const Movie = props => {
     const getGenre = getGenreParams()
     const getSort = getSortParams()
     const getRuntime = getRuntimeParams()
-    // console.log(getRuntime)
     
     //neu co reload thi bien se cap nhat theo params nguoc lai la chuoi rong
     let initialGenre = ""
@@ -190,13 +190,13 @@ const Movie = props => {
         // console.log(display)
         setDisplay(display)
     }
+
+    const handleGenreInParams = (value) => {
+        setFilters({...filters, page: 1, with_genres: value})
+    }
     if(loading){
         return(
-            <main className="main">
-                <div className="container">
-                    <div>Loading...</div>
-                </div>
-            </main>
+            <Loading />
         )
     }else{
         return (
@@ -212,7 +212,7 @@ const Movie = props => {
                         onYearChange={handleYearChange} getYear={getYear}
                         onRuntimeChange={handleRuntimeChange} getRuntime={getRuntime}
                         onSortChange={handleSortChange} getSort={getSort}
-                        onDisplayChange={handleDisplayChange} 
+                        onDisplayChange={handleDisplayChange}                        
                     />
 
                     <SectionMovie 
@@ -221,6 +221,7 @@ const Movie = props => {
                         type={"movie"} 
                         getMovie={getMovie} 
                         display={ display === "list" ? "list" : "grid"}
+                        onGenreClick={handleGenreInParams}
                     />
 
                     <Pagination page={filters.page} totalPage={totalPage} onPageChange={handlePageChange} />

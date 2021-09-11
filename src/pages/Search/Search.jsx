@@ -14,7 +14,7 @@ const Search = props => {
     const [filters, setFilters] = useState({
         page: 1
     })
-    const [totalPage, setTotalPage] = useState()
+    const [totalPage, setTotalPage] = useState(0)
     const options = [
         { 
             value: "movie", 

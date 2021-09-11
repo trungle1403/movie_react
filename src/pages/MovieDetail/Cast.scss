@@ -1,0 +1,47 @@
+.cast {
+    width: 100%;
+    &-list {
+        width: 100%;
+        display: grid;
+        gap: 20px 10px;
+        grid-template-columns: repeat(auto-fit, minmax(140px,1fr));
+        margin:10px 0 30px;
+    }
+    &-item {
+        text-align: center;
+        font-size: var(--small-fz);
+        display: inline-block;
+        cursor: pointer;
+    }
+    &-media {
+        display: inline-block;
+        position: relative;
+        figure {
+            margin: 0 auto;
+            height: 120px;
+            width: 120px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 50%;
+            border: 2px solid var(--white-color);
+            &:hover {
+                border: 2px solid orange;
+            }
+        }
+    }
+    &-img {
+        display: block;
+        height: auto;
+        width: 100%;
+    }
+    &-name {
+        font-weight: bold;
+        color: var(--white-color);
+    }
+    &-character{
+        color: var(--silver-gray-color);
+    }
+}
+
+@media only screen and (max-width: 768px){
+}

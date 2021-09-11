@@ -75,8 +75,8 @@ const Pagination = props => {
             )
         }
     }
-    if(totalPage != null){
-        return (
+    return (
+            totalPage !== 0 ?
             <div className="container">
                 <section className="pagination">
                     <ul className="pagination-list">
@@ -98,13 +98,8 @@ const Pagination = props => {
                     </div>
                 </section>
             </div>
+            : ""
         )
-    }else{
-        return(
-            <></>
-        )
-    }
-    
 }
 
 Pagination.propTypes = {

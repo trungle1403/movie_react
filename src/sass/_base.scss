@@ -49,6 +49,89 @@ body{
     background: var(--bg-color);
     color: var(--white-color);
     font-size: var(--normal-fz);
+    transition: background-color .3s linear, color .3s linear;
+}
+[data-theme="light"] {
+    --white-color: #0a0a0b;
+    --black-color: #fffaff;
+    --bg-color: #f5f5f5;
+    --bg-light-color: #fff;
+    --text-main-color: #0a0a0b;
+    // --text-second-color:#7a7a7a;
+    // --text-second-color:#a2a6a9;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 75px;
+    height: 35px;
+    z-index: 0;
+    input[type="checkbox"]{
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+    input[type="checkbox"]:checked + .slider {
+        background: #86868c;
+    }
+    input:checked + .slider:before {
+        -webkit-transform: translateX(35px);
+        -ms-transform: translateX(35px);
+        transform: translateX(35px);
+    }
+    .slider {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #ccc;
+        cursor: pointer;
+        transition: .3s linear;
+        border-radius: 34px;
+        box-shadow: 0 0 1px var(--bg-color);
+        &:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            border-radius: inherit;
+            left: 7px;
+            bottom: 4px;
+            background-color: var(--black-color);
+            -webkit-transition: .4s;
+            transition: .4s;
+            z-index: 10;
+        }
+    }
+    .label-dark, .label-light {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: var(--smaller-fz);
+        color: var(--black-color);
+        font-weight: 600;
+        text-transform: uppercase;
+        z-index: 9;
+        transition: all 0.2s ease;
+    }
+    input[type="checkbox"]:checked + .slider .label-dark {
+        opacity: 0;
+        visibility: hidden;
+    }
+    input[type="checkbox"]:checked + .slider .label-light {
+        opacity: 1;
+        visibility: visible;
+    }
+    .label-dark{
+        right: 7px;
+    }
+    .label-light{
+        left: 7px;
+        opacity: 0;
+        visibility: hidden;
+    }
 }
 .main {
     // overflow: hidden;

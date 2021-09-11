@@ -4,7 +4,7 @@ import './SectionMovie.scss'
 import Poster from '../Poster/Poster'
 
 const SectionMovie = props => {
-    const {type, movieData, number, getMovie, title, display} = props
+    const {type, movieData, number, getMovie, title, display, onGenreClick} = props
     return (
         <section className="section-movie">
             <div className="container">
@@ -12,7 +12,14 @@ const SectionMovie = props => {
                 title ? <h2 className="section-title">{title}</h2> : ''
             }
             </div>
-            <Poster display={display} type={type} movieData={movieData} number={number} getMovie={getMovie} />
+            <Poster 
+                display={display} 
+                type={type} 
+                movieData={movieData} 
+                number={number} 
+                getMovie={getMovie}
+                onGenreClick={onGenreClick}
+            />
         </section>
     )
 }
@@ -23,12 +30,14 @@ SectionMovie.propTypes = {
     type: PropTypes.string.isRequired,
     title: PropTypes.string,
     display: PropTypes.string,
+    onGenreClick: PropTypes.func,
 }
 SectionMovie.defaultProps = {
     movieData: [],
     number: 8,
     title: '',
-    display: ''
+    display: '',
+    onGenreClick: null,
 }
 
 export default SectionMovie

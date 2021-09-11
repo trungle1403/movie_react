@@ -1,0 +1,56 @@
+.loading-container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction:column;
+    gap: 10px 0;
+}
+
+.loading-label {
+    position: relative;
+    width: 40px;
+    height: 40px;
+}
+
+.loading-round {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--white-color);
+    display: inline-block;
+    transition: all 0.2s linear;
+    animation: zoomoutAnimation 1.7s linear infinite;
+}
+
+.loading-round:first-child{
+    background: var(--text-second-color);
+    animation: zoominAnimation 1.7s linear infinite;
+}
+
+@keyframes zoomoutAnimation {
+    0%{
+        transform: scale(0)
+    }
+    50%{
+        transform: scale(1)
+    }
+    100%{
+        transform: scale(0)
+    }
+}
+@keyframes zoominAnimation {
+    0%{
+        transform: scale(1)
+    }
+    50%{
+        transform: scale(0)
+    }
+    100%{
+        transform: scale(1)
+    }
+}

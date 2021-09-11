@@ -8,7 +8,7 @@ import Movie from '../../pages/Movie/Movie'
 import Show from '../../pages/Show/Show'
 import MovieDetail from '../../pages/MovieDetail/MovieDetail'
 import Search from '../../pages/Search/Search'
-
+import Collection from '../Collection/Collection'
 const Layout = () => {
     const [movieId, setMovieId] = useState();
     const [movieType, setMovieType] = useState('');
@@ -33,7 +33,7 @@ const Layout = () => {
                         <Route path='/type/show'>
                             <Show getMovie={getMovie} />
                         </Route>
-                        <Route path={`/${movieType}/:slug`}>
+                        <Route path={`/${movieType}/:idMovie`}>
                             <MovieDetail type={movieType} id={movieId}/>
                         </Route>
                         <Route exact path="/">
@@ -41,6 +41,9 @@ const Layout = () => {
                         </Route>
                         <Route path="/search">
                             <Search  type={movieType} getMovie={getMovie} />
+                        </Route>
+                        <Route path="/collection">
+                            <Collection/>
                         </Route>
                     </Switch>
                     {/* <Footer /> */}

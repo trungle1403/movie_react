@@ -34,13 +34,11 @@
                 display: none;
             }
         }
-
-        &-item {
-            
-        }
         &-link {
             font-size: var(--normal-fz);
             transition: .3s linear;
+            color: var(--text-second-color);
+            font-weight: 600;
             &:hover {
                 color: var(--green-color);
             }
@@ -61,8 +59,9 @@
             display: none;
             cursor: pointer;
             i {
-                font-size: var(--big-fz);
+                font-size: var(--bigger-fz) !important;
                 vertical-align: middle;
+                color: var( --text-second-color);
             }
         }
         &-overlay {
@@ -85,8 +84,8 @@
         }
         &-login {
             background: var(--red-color);
+            color: #fff;
         }
-        
     }
 }
 
@@ -98,7 +97,7 @@
                 width: 200px;
                 height: 100%;
                 top: 0;
-                left: -200px;
+                right: -200px;
                 flex-direction: column;
                 gap: 30px 0;
                 padding-top: 150px;
@@ -111,7 +110,7 @@
                 visibility:hidden;
                 z-index: 999;
                 &.active {
-                    left: 0;
+                    right: 0;
                     opacity: 1;
                     visibility: visible;
                 }
@@ -133,6 +132,7 @@
                 &.active {
                     opacity: 1;
                     visibility: visible;
+                    z-index: 1;
                 }
             }
             &-link {
@@ -143,7 +143,7 @@
             }
             &-close {
                 position: absolute;
-                top: 20px;left: 20px;
+                top: 20px;right: 20px;
             }
             &-search {
                 display: flex;

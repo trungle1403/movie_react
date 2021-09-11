@@ -1,4 +1,4 @@
-import React, {useRef, useEffect} from 'react'
+import React, {useRef, useEffect, useState} from 'react'
 import {Link, useLocation} from 'react-router-dom'
 import logo from '../../assets/images/logo.png'
 import './header.scss'
@@ -42,10 +42,33 @@ const Header = () => {
                 headerRef.current.classList.remove('sticky');
             }
         })
-        return () => {
-            window.removeEventListener('scroll');
-        };
+        // return () => {
+        //     window.removeEventListener('scroll');
+        // };
     }, [])
+    
+    const storedTheme = localStorage.getItem('movie-theme')
+    const [theme, setTheme] = useState(storedTheme)
+    useEffect(()=> {
+        const checkbox = document.querySelector('#toggleDarkMode')
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('movie-theme', theme);
+        if(theme === 'light'){
+            checkbox.checked = true;
+        }else{
+            checkbox.checked = false;
+        }
+        
+    },[theme])
+    
+    const handleChangeTheme = () => {
+        const checkbox = document.querySelector('#toggleDarkMode')
+        if(checkbox.checked){
+            setTheme("light")
+        }else{
+            setTheme("dark")
+        }
+    }
     return (
         <header className="header" ref={headerRef}>
             <nav className="nav">
@@ -65,17 +88,27 @@ const Header = () => {
                             ))
                         }
                         <li className="nav-item nav-close" onClick={() => navToggle()} >
-                            <i class='bx bxs-chevrons-left'></i>
+                            <i class='bx bxs-chevrons-right'></i>
                         </li>
                         <Link to='/login' className='btn-custom nav-login'>Đăng nhập</Link>
                     </ul>
                 </div>
                 <div className="nav-action">
                     <Link to='/search' className='nav-link nav-search'><i class='bx bx-search' ></i></Link>
+                    <Link to='/collection' className='nav-link'>Collection</Link>
                     <Link to='/login' className='btn-custom nav-login'>Đăng nhập</Link>
                     <div className="nav-toggle"  onClick={() => navToggle()}>
                         <i class='bx bx-menu'></i>
                     </div>
+                    <label className="switch toggle-theme-desktop" 
+                    onClick={() =>handleChangeTheme("desktop")}
+                    >
+                        <input type="checkbox" id="toggleDarkMode" /> 
+                        <span className="slider">
+                            <span className="label-light">light</span>
+                            <span className="label-dark">dark</span>
+                        </span>
+                    </label>
                 </div>
             </nav>
         </header>
