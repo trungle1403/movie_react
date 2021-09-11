@@ -74,20 +74,19 @@ const MovieDetail = props => {
 
     useEffect(() => {
         const showStored = () => {
-            const index = listStored.findIndex( item => item === id)
-            if( index !== -1) {
-                listStored.splice(index, 1)
-            }else{
-                listStored.push(id)
-            }
-            localStorage.setItem("movie-storage",JSON.stringify(listStored))
+            localStorage.setItem("movie-storage",JSON.stringify(movieStored))
         }
         showStored()
     }, [movieStored]);
     
     const handleCollectionClick = (id) => {
         setMovieStored(listStored)
-        
+        const index = listStored.findIndex( item => item === id)
+            if( index !== -1) {
+                listStored.splice(index, 1)
+            }else{
+                listStored.push(id)
+            }
     }
     return (
         <>
