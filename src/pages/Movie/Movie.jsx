@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react'
 import { useHistory } from 'react-router-dom'
-import PropTypes from 'prop-types'
 import Helmet from '../../components/Helmet'
 import SectionMovie from '../../components/SectionMovie/SectionMovie'
 import Pagination from '../../components/Pagination/Pagination'
@@ -29,7 +28,6 @@ const createParams = (obj, history, params) => {
     history.push(`?${queryString.stringify(params)}`);
 }
 const Movie = props => {
-    const {getMovie} = props
     const [movie, setMovie] = useState([])
     const [limitPage, setLimitPage] = useState(20)
     const [totalPage, setTotalPage] = useState()
@@ -194,13 +192,9 @@ const Movie = props => {
     const handleGenreInParams = (value) => {
         setFilters({...filters, page: 1, with_genres: value})
     }
-    if(loading){
-        return(
-            <Loading />
-        )
-    }else{
-        return (
-            <Helmet title='Phim Lẻ'>
+    return(
+        <Helmet title='Phim Lẻ'>
+            { loading ? <Loading /> :
                 <main className="main">
                     <div className="container">
                         <h1 className="page-title">Phim lẻ</h1>
@@ -219,23 +213,16 @@ const Movie = props => {
                         movieData={movie} 
                         number={limitPage} 
                         type={"movie"} 
-                        getMovie={getMovie} 
                         display={ display === "list" ? "list" : "grid"}
                         onGenreClick={handleGenreInParams}
                     />
 
                     <Pagination page={filters.page} totalPage={totalPage} onPageChange={handlePageChange} />
                 </main>
-            </Helmet>
-        )
-    }
+            }
+        </Helmet>
+    )
 }
 
-Movie.propTypes = {
-    getMovie: PropTypes.func
-}
-Movie.propTypes = {
-    getMovie: null
-}
 
 export default Movie

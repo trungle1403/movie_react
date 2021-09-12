@@ -42,9 +42,9 @@ const Header = () => {
                 headerRef.current.classList.remove('sticky');
             }
         })
-        // return () => {
-        //     window.removeEventListener('scroll');
-        // };
+        return () => {
+            window.removeEventListener('scroll');
+        };
     }, [])
     
     const storedTheme = localStorage.getItem('movie-theme')
@@ -90,13 +90,16 @@ const Header = () => {
                         <li className="nav-item nav-close" onClick={() => navToggle()} >
                             <i class='bx bxs-chevrons-right'></i>
                         </li>
-                        <Link to='/login' className='btn-custom nav-login'>Đăng nhập</Link>
+                        <div className="nav-active-hidden">
+                            <Link to='/collection' className='btn-custom nav-collection'>
+                            <i class='bx bx-add-to-queue'></i> <span>Bộ sưu tập</span></Link>
+                        </div>
                     </ul>
                 </div>
                 <div className="nav-action">
                     <Link to='/search' className='nav-link nav-search'><i class='bx bx-search' ></i></Link>
-                    <Link to='/collection' className='nav-link'>Collection</Link>
-                    <Link to='/login' className='btn-custom nav-login'>Đăng nhập</Link>
+                    <Link to='/collection' className='btn-custom nav-collection'>
+                    <i class='bx bx-add-to-queue'></i> <span>Bộ sưu tập</span></Link>
                     <div className="nav-toggle"  onClick={() => navToggle()}>
                         <i class='bx bx-menu'></i>
                     </div>
@@ -107,6 +110,8 @@ const Header = () => {
                         <span className="slider">
                             <span className="label-light">light</span>
                             <span className="label-dark">dark</span>
+                            <i class='bx bxs-sun label-icon icon-light'></i> 
+                            <i class='bx bxs-moon label-icon icon-dark'></i>
                         </span>
                     </label>
                 </div>

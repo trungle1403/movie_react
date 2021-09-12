@@ -1,16 +1,16 @@
 import React, { useEffect, useState} from 'react'
-import PropTypes from 'prop-types'
 import Helmet from '../../components/Helmet'
 import Pagination from '../../components/Pagination/Pagination'
 import SectionMovie from '../../components/SectionMovie/SectionMovie'
 import getPageParams from '../../utils/getPageParams'
+import Loading from '../../components/Loading/Loading'
 
 const Show = props => {
-    const {getMovie} = props
     const [movie, setMovie] = useState([])
 
     const [limitPage, setLimitPage] = useState(20)
     const [totalPage, setTotalPage] = useState()
+    const [loading, setLoading] = useState(true)
 
     const getPage = getPageParams();
 
@@ -36,6 +36,7 @@ const Show = props => {
                 setLimitPage(results.length)                
                 setTotalPage(total_page)
                 setMovie(results)
+                setLoading(false)
                 // console.log('phim bo: ', data)
             }catch (e) {
                 console.log(e.message)
@@ -45,23 +46,18 @@ const Show = props => {
     }, [filters])
     return (
         <Helmet title='Phim Bộ'>
-            <main className="main">
-                <div className="container">
-                    <h1 className="page-title">Phim bộ</h1>
-                </div>
-                <SectionMovie movieData={movie} number={limitPage} type={"tv"} getMovie={getMovie} />
+            { loading ? <Loading /> :
+                <main className="main">
+                    <div className="container">
+                        <h1 className="page-title">Phim bộ</h1>
+                    </div>
+                    <SectionMovie movieData={movie} number={limitPage} type={"tv"}  />
 
-                <Pagination page={filters.page} totalPage={totalPage} onPageChange={handlePageChange} />
-            </main>
+                    <Pagination page={filters.page} totalPage={totalPage} onPageChange={handlePageChange} />
+                </main>
+            }
         </Helmet>
     )
-}
-
-Show.propTypes = {
-    getMovie: PropTypes.func
-}
-Show.propTypes = {
-    getMovie: null
 }
 
 export default Show

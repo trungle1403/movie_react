@@ -1,11 +1,9 @@
 import React,{ useEffect, useState, useRef} from 'react'
-import PropTypes from 'prop-types'
 import './Search.scss'
 import Poster from '../../components/Poster/Poster'
 import Pagination from '../../components/Pagination/Pagination'
 import Select from 'react-select'
 const Search = props => {
-    const  {getMovie} = props
     // console.log(getMovie)
     const [input, setInput] = useState("")
     const [movieData, setMovieData] = useState([])
@@ -78,19 +76,11 @@ const Search = props => {
                     <input type="text" onChange={handleInputChange}  className="search-input" placeholder="Nhập tên phim..." />
                 </div>
                 <br />
-                <Poster movieData={movieData} type={optionsData} getMovie={getMovie} />
+                <Poster movieData={movieData} type={optionsData} />
                 <br />
                 <Pagination page={filters.page} totalPage={totalPage} onPageChange={handlePageChange} />
             </div>
         </main>
     )
 }
-
-Search.propTypes = {
-    getMovie: PropTypes.func,
-}
-Search.propTypes = {
-    getMovie: null,
-}
-
 export default Search

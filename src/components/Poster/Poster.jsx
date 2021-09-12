@@ -6,7 +6,7 @@ import GenreSelectData from '../Select/GenreSelectData'
 import './Poster.scss'
 
 const Poster = props => {
-    const {type, movieData, number, getMovie, display, onGenreClick} = props
+    const {type, movieData, number, display, onGenreClick} = props
 
     movieData.splice(number, movieData.length - number);
 
@@ -46,17 +46,15 @@ const Poster = props => {
                         movieData.map((item, index) => (
                             <div key={index} className="movie-item">
                                 <div className="content-left">
-                                    <Link to={`/${type}/${item.id}`} onClick={() => getMovie(item.id, type)}className="movie-media">
+                                    <Link to={`/${type}/${item.id}`} className="movie-media">
                                         <img src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} alt="" className="movie-poster" />
                                     </Link>
                                 </div>
                                 <div className="content-right">
                                     <div className="content-row">
                                         <div className="content-column">
-                                            <Link onClick={() => getMovie(item.id, type)} 
-                                            to={`/${type}/${item.id}`}  className="movie-link movie-title">{item.title || item.name}</Link>
-                                            <Link onClick={() => getMovie(item.id, type)}
-                                            to={`/${type}/${item.id}`}  className="movie-link movie-subtitle">
+                                            <Link to={`/${type}/${item.id}`}  className="movie-link movie-title">{item.title || item.name}</Link>
+                                            <Link to={`/${type}/${item.id}`}  className="movie-link movie-subtitle">
                                                 {item.original_title || item.original_name}</Link>
                                         </div>
                                         <div className="content-column">
@@ -98,13 +96,11 @@ const Poster = props => {
                     {
                         movieData.map((item, index) => (
                             <div key={index} className="movie-item">
-                                <Link to={`/${type}/${item.id}`} onClick={() => getMovie(item.id, type)}className="movie-media">
+                                <Link to={`/${type}/${item.id}`}className="movie-media">
                                     <img src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} alt="" className="movie-poster" />
                                 </Link>
-                                <Link onClick={() => getMovie(item.id, type)} 
-                                to={`/${type}/${item.id}`}  className="movie-link movie-title">{item.title || item.name}</Link>
-                                <Link onClick={() => getMovie(item.id, type)}
-                                to={`/${type}/${item.id}`}  className="movie-link movie-subtitle">
+                                <Link to={`/${type}/${item.id}`}  className="movie-link movie-title">{item.title || item.name}</Link>
+                                <Link to={`/${type}/${item.id}`}  className="movie-link movie-subtitle">
                                     {item.original_title || item.original_name}</Link>
                             </div>
                         ))

@@ -1,15 +1,16 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import Helmet from '../../components/Helmet'
+import Loading from '../../components/Loading/Loading'
 import SectionMovie from '../../components/SectionMovie/SectionMovie.jsx'
 
 const Home = props => {
 
-    const {getMovie} = props
     const [movieRecommend, setMovieRecommend] = useState([])
     const [movie, setMovie] = useState([])
     const [movieTv, setMovieTv] = useState([])
-
+    const [loading1, setLoading1] = useState(true)
+    const [loading2, setLoading2] = useState(true)
     useEffect(() => {
         const fetchMovie = async () => {
             try {
@@ -18,6 +19,7 @@ const Home = props => {
                 const data = await response.json()
                 const {results} = data
                 setMovieRecommend(results)
+                setLoading1(false)
             }catch (e) {
                 console.log('Failed to fetch:', e.message)
             }
@@ -37,6 +39,7 @@ const Home = props => {
                 } else {
                     setMovie(results)
                 }
+                setLoading2(false)
             }catch (e) {
                 console.log('Failed to fetch:', e.message);
             }
@@ -48,11 +51,15 @@ const Home = props => {
     return (
         <Helmet>
             <main className="main">
-                <SectionMovie type={"movie"} movieData={movieRecommend} number={8} getMovie={getMovie} title={"Phim đề cử"}  />
-
-                <SectionMovie type={"movie"} movieData={movie} number={8} getMovie={getMovie} title={"Phim lẻ chất lượng cao"} />
-
-                <SectionMovie type={"tv"} movieData={movieTv} number={8} getMovie={getMovie} title={"Phim bộ hấp dẫn"}  />
+                {
+                    loading1 ? <Loading/> : <SectionMovie type={"movie"} movieData={movieRecommend} number={8} title={"Phim đề cử"}  />
+                }
+                {
+                    loading2 ? <Loading/> : <SectionMovie type={"movie"} movieData={movie} number={8} title={"Phim lẻ chất lượng cao"} />
+                }
+                {
+                    loading2 ? <Loading/> : <SectionMovie type={"tv"} movieData={movieTv} number={8} title={"Phim bộ hấp dẫn"}  />
+                }
             </main>
         </Helmet>
     )

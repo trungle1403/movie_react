@@ -30,7 +30,7 @@
             align-items: center;
             gap: var(--gapx);
 
-            .nav-login {
+            .nav-collection {
                 display: none;
             }
         }
@@ -82,9 +82,12 @@
             display: none;
             
         }
-        &-login {
-            background: var(--red-color);
+        &-collection {
+            background: var(--green-color);
             color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0 5px;
         }
     }
 }
@@ -114,9 +117,10 @@
                     opacity: 1;
                     visibility: visible;
                 }
-                .nav-login {
+                .nav-collection {
                     display: block;
                 }
+                
             }
             &-overlay {
                 position: fixed;
@@ -148,8 +152,13 @@
             &-search {
                 display: flex;
             }
-            &-login {
+            &-collection {
                 display: none;
+            }
+            &-active-hidden {
+                border-top: 1px solid var(--silver-color);
+                padding-top: 50px;
+                margin-top: 10px;
             }
         }
     }

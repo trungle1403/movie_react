@@ -73,12 +73,13 @@ body{
         height: 0;
     }
     input[type="checkbox"]:checked + .slider {
-        background: #86868c;
+        // background: #86868c;
+        background: var(--silver-color);
     }
     input:checked + .slider:before {
-        -webkit-transform: translateX(35px);
-        -ms-transform: translateX(35px);
-        transform: translateX(35px);
+        -webkit-transform: translateX(37px);
+        -ms-transform: translateX(37px);
+        transform: translateX(37px);
     }
     .slider {
         position: absolute;
@@ -97,11 +98,11 @@ body{
             height: 26px;
             width: 26px;
             border-radius: inherit;
-            left: 7px;
+            left: 6px;
             bottom: 4px;
-            background-color: var(--black-color);
-            -webkit-transition: .4s;
-            transition: .4s;
+            background: rgba(255, 255, 255, 0.6);
+            -webkit-transition: .4s ease;
+            transition: .4s ease;
             z-index: 10;
         }
     }
@@ -116,19 +117,43 @@ body{
         z-index: 9;
         transition: all 0.2s ease;
     }
-    input[type="checkbox"]:checked + .slider .label-dark {
+    .label-icon {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: var(--smaller-fz);
+        color: #fff;
+        z-index: 10;
+        transition: .3s ease;
+    }
+    .icon-light {
+        right: 10px;
+        opacity: 0;
+        visibility: hidden;
+        color: yellow;
+    }
+    .icon-dark {
+        left: 10px;
+        color: #269cc3;
+    }
+    input[type="checkbox"]:checked + .slider .label-dark,
+    input[type="checkbox"]:checked + .slider .icon-dark {
         opacity: 0;
         visibility: hidden;
     }
-    input[type="checkbox"]:checked + .slider .label-light {
+    input[type="checkbox"]:checked + .slider .label-light,
+    input[type="checkbox"]:checked + .slider .icon-light {
         opacity: 1;
         visibility: visible;
     }
+    input[type="checkbox"]:checked + .slider:before{
+        background: rgba(1, 1, 1, 0.3);
+    }
     .label-dark{
-        right: 7px;
+        right: 5px;
     }
     .label-light{
-        left: 7px;
+        left: 5px;
         opacity: 0;
         visibility: hidden;
     }

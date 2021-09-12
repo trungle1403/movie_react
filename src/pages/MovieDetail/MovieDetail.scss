@@ -114,7 +114,7 @@
         li {
             display: flex;
             align-items: center;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
         span {
             text-transform: uppercase;
@@ -130,7 +130,7 @@
         font-size: var(--normal-fz);
         color: var(--white-color);
         margin-bottom: 20px;
-
+        line-height: calc(var(--normal-fz) + 10px);
         span {
             font-weight: bold;
             color: var(--white-color);
@@ -142,8 +142,18 @@
         background: var(--green-color);
         display: inline-flex;
         align-items: center;
+        gap: 0 5px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         i {
             font-size: var(--big-fz);
+        }
+    }
+    .added {
+        background: #fff;
+        font-weight: bold;
+        color: var(--green-color);
+        i{
+            font-weight: bold;
         }
     }
     .text {

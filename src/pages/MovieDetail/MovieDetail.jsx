@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Helmet from '../../components/Helmet'
 import Loading from '../../components/Loading/Loading'
 import GenreSelectData from '../../components/Select/GenreSelectData'
@@ -8,11 +8,15 @@ import formatDate from '../../utils/formatDate'
 import './MovieDetail.scss'
 import Cast from './Cast'
 
-
 const MovieDetail = props => {
-    const {id, type, onGenreClick} = props
+    const {onGenreClick} = props
+    const {id, type} = useParams()
+    let idMovie = Number(id)
+    // console.log(idMovie)
     const [movie, setMovie] = useState([])
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
+    const [isStored, setIsStored] = useState(false)
+
     const updating = "Đang cập nhật"
     const optionsGenre = GenreSelectData()
     const showGenre = (arr) => {
@@ -53,8 +57,8 @@ const MovieDetail = props => {
                 const data = await responve.json();
                 // const {results} = data;
                 setMovie(data)
-                setLoading(true)
-                console.log(data)
+                setLoading(false)
+                // console.log(data)
             }catch(e){
                 console.log("failed to fetch movie item: ", e.message);
             }
@@ -62,36 +66,64 @@ const MovieDetail = props => {
         fetchMovieItem();
     },[id, type])
 
-    
-    const storedMovie = localStorage.getItem('movie-storage')
     let listStored
-    if(storedMovie == null){
-        listStored = []
+    if(type === "movie") {
+        const storedMovie = localStorage.getItem('movie-storage')
+        storedMovie == null ? listStored = [] : listStored = JSON.parse(storedMovie)
     }else{
-        listStored = JSON.parse(storedMovie)
-    } 
+        const storedMovie = localStorage.getItem('tv-storage')
+        storedMovie == null ? listStored = [] : listStored = JSON.parse(storedMovie)
+    }
     const [movieStored, setMovieStored] = useState(listStored)
-
     useEffect(() => {
-        const showStored = () => {
+        if(type === "movie"){
             localStorage.setItem("movie-storage",JSON.stringify(movieStored))
+        }else{
+            localStorage.setItem("tv-storage",JSON.stringify(movieStored))
         }
-        showStored()
-    }, [movieStored]);
-    
-    const handleCollectionClick = (id) => {
-        setMovieStored(listStored)
-        const index = listStored.findIndex( item => item === id)
-            if( index !== -1) {
-                listStored.splice(index, 1)
-            }else{
-                listStored.push(id)
+        const temp = [...movieStored]
+        let num = 0
+        for(let item in temp) {
+            if(Number(temp[item].id) !== Number(id)){
+                num++
             }
+        }
+        num !== temp.length ? setIsStored(true) : setIsStored(false)
+        // const index = temp.indexOf(id)
+        // index !== -1 ? setIsStored(true) : setIsStored(false)
+    }, [movieStored,id,type]);
+
+    const handleCollectionClick = (id,type,title,subtitle,path) => {
+        let obj = {}
+        // clone data
+        const temp = [...movieStored]
+        let num = 0
+        let index
+        for(let item in temp) {
+            if(temp[item].id !== id){
+                num++
+            }else{
+                index = item
+            }
+        }
+        //khong ton tai
+        if(num === temp.length){
+            obj.id = id
+            obj.type = type
+            obj.title = title
+            obj.original_title = subtitle
+            obj.poster_path = path
+            temp.push(obj)
+        }else{
+            temp.splice(index, 1)
+        }
+        setMovieStored(temp)
+        // const index = temp.indexOf(id)
+        // index !== -1 ? temp.splice(index, 1) :  temp.push(id)
     }
     return (
-        <>
-            {loading === true ?
-            <Helmet title={`${movie.title || movie.name} | Xem phim online chất lượng cao`}>
+        <Helmet title={`${movie.title || movie.name} | Xem phim online chất lượng cao`}>
+            {loading ?  <Loading /> :
                 <section className="detail">
                 <div className="backdrop" style={{
                     backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
@@ -126,11 +158,22 @@ const MovieDetail = props => {
                                 <span className="detail-vote"> ({movie.vote_count} votes)</span>
                             </div>
                             <div className="detail-action">
+                            {
+                                console.log(isStored)
+                            }
                                 {/* <Link className="btn-custom btn-share-fb" to='/'>Chia sẻ</Link> */}
-                                <div className="btn-custom btn-collection" 
-                                    onClick={() => handleCollectionClick(movie.id)}>
-                                    <i class='bx bx-plus'></i>&nbsp; <span>Bộ sưu tập</span>
-                                </div>
+                                {
+                                    isStored ? <div className="btn-custom btn-collection added" 
+                                                onClick={() => 
+                                                handleCollectionClick(idMovie, type, movie.title || movie.name,movie.original_title || movie.original_name,movie.poster_path)}>
+                                                <i class='bx bx-check'></i> <span>Đã lưu vào bộ sưu tập</span>
+                                            </div> 
+                                    : 
+                                            <div className="btn-custom btn-collection" 
+                                                onClick={() => handleCollectionClick(idMovie, type, movie.title || movie.name,movie.original_title || movie.original_name,movie.poster_path)}>
+                                                <i class='bx bx-plus'></i> <span>Bộ sưu tập</span>
+                                            </div>
+                                }
                             </div>
                             <div className="detail-category">
                                 {showGenre(movie.genres)}
@@ -142,7 +185,8 @@ const MovieDetail = props => {
                                 <li>
                                     <span>QUỐC GIA</span> 
                                     <p>
-                                        {movie.production_countries.map((country, index) => {
+                                        { movie.production_countries === null ? updating :
+                                        movie.production_countries.map((country, index) => {
                                                 if(index < 1){
                                                     return(country.name);
                                                 }else{
@@ -165,28 +209,20 @@ const MovieDetail = props => {
                             </div>
                             <div className="cast">
                                 <h3>Diễn viên</h3>
-                                <Cast id={id} type={type}  />
+                                <Cast id={idMovie} type={type}  />
                             </div>
                         </div>
                     </div>
                 </section>
-            </Helmet>
-
-            :   
-                <Loading />
             }
-        </>
+        </Helmet>
     )
 }
 
 MovieDetail.propTypes = {
-    type: PropTypes.string,
-    id: PropTypes.number,
     onGenreClick: PropTypes.func
 }
 MovieDetail.propTypes = {
-    type: null,
-    id: null,
     onGenreClick: null,
 }
 
