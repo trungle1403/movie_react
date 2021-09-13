@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Header from '../Header/Header'
 // import Footer from '../Footer/Footer'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
@@ -9,7 +9,15 @@ import Show from '../../pages/Show/Show'
 import MovieDetail from '../../pages/MovieDetail/MovieDetail'
 import Search from '../../pages/Search/Search'
 import Collection from '../Collection/Collection'
+import Actor from '../Actor/Actor'
+import Watch from '../Watch/Watch'
 const Layout = () => {
+    const [movieName, setMovieName] = useState()
+    const [movieSubName, setMovieSubName] = useState()
+    const getMovieName = (name,subname) => {
+        setMovieName(name)
+        setMovieSubName(subname)
+    }
     return (
         <Router>
             <Route render={props => (
@@ -22,9 +30,6 @@ const Layout = () => {
                         <Route path='/type/show'>
                             <Show />
                         </Route>
-                        <Route path={`/:type/:id`}>
-                            <MovieDetail />
-                        </Route>
                         <Route exact path="/">
                             <Home />
                         </Route>
@@ -34,7 +39,15 @@ const Layout = () => {
                         <Route path="/collection">
                             <Collection />
                         </Route>
-                        
+                        <Route path="/actor/:slug~:id">
+                            <Actor/>
+                        </Route>
+                        <Route exact path={`/:type/:slug/:id`}>
+                            <MovieDetail getMovieName={getMovieName} />
+                        </Route>
+                        <Route exact path="/watch-:type/:slug~:id">
+                        <Watch name={movieName} subName={movieSubName} />
+                        </Route>
                     </Switch>
                     {/* <Footer /> */}
                 </div>

@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
 import Loading from '../../components/Loading/Loading';
 import imgNull from '../../assets/images/user-none.png'
+import createSlug from '../../utils/slug'
 import './Cast.scss'
 const Cast = props => {
     const {id, type} = props
-    console.log(id)
     const [cast, setCast] = useState([])
     const [loading, setLoading] = useState(false)
     
@@ -19,7 +19,7 @@ const Cast = props => {
                   const {cast} = data;
                   setCast(cast)
                   setLoading(true)
-                  console.log('cast: ',cast)
+                  // console.log('cast: ',cast)
               }catch(e){
                   console.log("failed to fetch cast item: ", e.message);
               }
@@ -32,7 +32,7 @@ const Cast = props => {
         {
         cast.map((item, index) => (
             <div key={index} className="cast-item">
-                <Link to={`/actor/${item.id}`} className="cast-media">
+                <Link to={`/actor/${createSlug( item.name)}~${item.id}`} className="cast-media">
                     <figure>
                       {
                         item.profile_path !== null ? <img src={`https://image.tmdb.org/t/p/w138_and_h175_face/${item.profile_path}`} alt="" className="cast-img" />
@@ -41,7 +41,7 @@ const Cast = props => {
                     
                     </figure>
                 </Link>
-                <p  to={`/cast/${item.id}`} 
+                <p  to={`/actor`} 
                 className="cast-name">{item.name}</p>
                 <p className="cast-character">{item.character}</p>
             </div>

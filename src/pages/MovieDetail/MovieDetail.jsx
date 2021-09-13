@@ -5,18 +5,16 @@ import Helmet from '../../components/Helmet'
 import Loading from '../../components/Loading/Loading'
 import GenreSelectData from '../../components/Select/GenreSelectData'
 import formatDate from '../../utils/formatDate'
+import createSlug from '../../utils/slug'
 import './MovieDetail.scss'
 import Cast from './Cast'
 
 const MovieDetail = props => {
-    const {onGenreClick} = props
-    const {id, type} = useParams()
-    let idMovie = Number(id)
-    // console.log(idMovie)
+    const {onGenreClick, getMovieName} = props
+    const {id,type} = useParams()
     const [movie, setMovie] = useState([])
     const [loading, setLoading] = useState(true)
     const [isStored, setIsStored] = useState(false)
-
     const updating = "Đang cập nhật"
     const optionsGenre = GenreSelectData()
     const showGenre = (arr) => {
@@ -94,7 +92,6 @@ const MovieDetail = props => {
     }, [movieStored,id,type]);
 
     const handleCollectionClick = (id,type,title,subtitle,path) => {
-        let obj = {}
         // clone data
         const temp = [...movieStored]
         let num = 0
@@ -108,6 +105,7 @@ const MovieDetail = props => {
         }
         //khong ton tai
         if(num === temp.length){
+            const obj = {}
             obj.id = id
             obj.type = type
             obj.title = title
@@ -122,19 +120,23 @@ const MovieDetail = props => {
         // index !== -1 ? temp.splice(index, 1) :  temp.push(id)
     }
     return (
-        <Helmet title={`${movie.title || movie.name} | Xem phim online chất lượng cao`}>
-            {loading ?  <Loading /> :
+        loading ?  <Loading /> :
+            <Helmet title={`${movie.title || movie.name} - ${movie.original_title || movie.original_name} | Xem phim online chất lượng cao`}>
                 <section className="detail">
                 <div className="backdrop" style={{
                     backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
                 }}></div>
-                    <div className=" container detail-container grid">
-                        <div className="detail-media">
-                            <div className="detail-media-img">
-                                <img src={`https://image.tmdb.org/t/p/w342/${movie.poster_path}`} alt="" className="detail-img" />
+                    <div className="container detail-container grid">
+                        <div className="detail-sticky">
+                            <div className="detail-media">
+                                <div className="detail-media-img">
+                                    <img src={`https://image.tmdb.org/t/p/w342/${movie.poster_path}`} alt="" className="detail-img" />
+                                </div>
+                                <Link to={`/watch-${type}/${createSlug(movie.title || movie.name)}~${movie.id}`} 
+                                    onClick={getMovieName(movie.title || movie.name,movie.original_title || movie.original_name )}
+                                className='btn-custom btn-view'> <i class='bx bx-play'></i> 
+                                <span>Xem phim</span></Link>
                             </div>
-                            <Link to='/view/' className='btn-custom btn-view'> <i class='bx bx-play'></i> 
-                            <span>Xem phim</span></Link>
                         </div>
                         <div className="detail-content">
                             <h1 className="detail-title">{movie.title || movie.name}</h1>
@@ -158,19 +160,18 @@ const MovieDetail = props => {
                                 <span className="detail-vote"> ({movie.vote_count} votes)</span>
                             </div>
                             <div className="detail-action">
-                            {
-                                console.log(isStored)
-                            }
-                                {/* <Link className="btn-custom btn-share-fb" to='/'>Chia sẻ</Link> */}
+                                <div className="btn-custom btn-share-fb">
+                                    <i class='bx bxl-facebook-square'></i><span>Chia sẻ</span>
+                                </div>
                                 {
                                     isStored ? <div className="btn-custom btn-collection added" 
                                                 onClick={() => 
-                                                handleCollectionClick(idMovie, type, movie.title || movie.name,movie.original_title || movie.original_name,movie.poster_path)}>
+                                                handleCollectionClick(Number(id), type, movie.title || movie.name,movie.original_title || movie.original_name,movie.poster_path)}>
                                                 <i class='bx bx-check'></i> <span>Đã lưu vào bộ sưu tập</span>
                                             </div> 
                                     : 
                                             <div className="btn-custom btn-collection" 
-                                                onClick={() => handleCollectionClick(idMovie, type, movie.title || movie.name,movie.original_title || movie.original_name,movie.poster_path)}>
+                                                onClick={() => handleCollectionClick(Number(id), type, movie.title || movie.name,movie.original_title || movie.original_name,movie.poster_path)}>
                                                 <i class='bx bx-plus'></i> <span>Bộ sưu tập</span>
                                             </div>
                                 }
@@ -209,21 +210,22 @@ const MovieDetail = props => {
                             </div>
                             <div className="cast">
                                 <h3>Diễn viên</h3>
-                                <Cast id={idMovie} type={type}  />
+                                <Cast id={Number(id)} type={String(type)}  />
                             </div>
                         </div>
                     </div>
                 </section>
-            }
-        </Helmet>
+            </Helmet>
     )
 }
 
 MovieDetail.propTypes = {
-    onGenreClick: PropTypes.func
+    onGenreClick: PropTypes.func,
+    getMovieName: PropTypes.func,
 }
 MovieDetail.propTypes = {
     onGenreClick: null,
+    getMovieName: null
 }
 
 export default MovieDetail

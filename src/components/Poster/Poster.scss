@@ -87,7 +87,7 @@
         color: var(--silver-gray-color);
     }
     .movie-overview {
-        color: var(--silver-gray-color);
+        color: var(--text-second-color);
         font-size: var(--normal-fz);
         line-height: calc(var(--normal-fz) + 15px);
         margin-bottom: 15px;
@@ -140,12 +140,11 @@
     .movie-list {
         grid-template-columns: repeat(2, 1fr);
     }
+    .movie-media {
+        height: unset;
+    }
 }
 @media screen and (max-width: 468px) {
-    .movie-list {
-        grid-template-columns: 1fr;
-        gap: 25px 0;
-    }
     .movie-media {
         width: 100%;
     }

@@ -57,8 +57,7 @@ body{
     --bg-color: #f5f5f5;
     --bg-light-color: #fff;
     --text-main-color: #0a0a0b;
-    // --text-second-color:#7a7a7a;
-    // --text-second-color:#a2a6a9;
+    --text-second-color:#7a7a7a;
 }
 
 .switch {
@@ -99,7 +98,7 @@ body{
             width: 26px;
             border-radius: inherit;
             left: 6px;
-            bottom: 4px;
+            bottom: 5px;
             background: rgba(255, 255, 255, 0.6);
             -webkit-transition: .4s ease;
             transition: .4s ease;

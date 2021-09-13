@@ -3,6 +3,7 @@ import './Search.scss'
 import Poster from '../../components/Poster/Poster'
 import Pagination from '../../components/Pagination/Pagination'
 import Select from 'react-select'
+import Helmet from '../../components/Helmet'
 const Search = props => {
     // console.log(getMovie)
     const [input, setInput] = useState("")
@@ -65,22 +66,24 @@ const Search = props => {
         setFilters({...filters, page: newPage})
     }
     return (
-        <main className="main">
-            <div className="search-wrapper">
-                <div className="container search-container">
-                    <Select className="search-select" 
-                        options={options} 
-                        defaultValue={options[0]} 
-                        onChange={handleOptionChange}
-                    />
-                    <input type="text" onChange={handleInputChange}  className="search-input" placeholder="Nhập tên phim..." />
+        <Helmet title="Tìm kiếm...">
+            <main className="main">
+                <div className="search-wrapper">
+                    <div className="container search-container">
+                        <Select className="search-select" 
+                            options={options} 
+                            defaultValue={options[0]} 
+                            onChange={handleOptionChange}
+                        />
+                        <input type="text" onChange={handleInputChange}  className="search-input" placeholder="Nhập tên phim..." />
+                    </div>
+                    <br />
+                    <Poster movieData={movieData} type={optionsData} />
+                    <br />
+                    <Pagination page={filters.page} totalPage={totalPage} onPageChange={handlePageChange} />
                 </div>
-                <br />
-                <Poster movieData={movieData} type={optionsData} />
-                <br />
-                <Pagination page={filters.page} totalPage={totalPage} onPageChange={handlePageChange} />
-            </div>
-        </main>
+            </main>
+        </Helmet>
     )
 }
 export default Search
