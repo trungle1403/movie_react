@@ -5,6 +5,7 @@ overflow-x: hidden;
 overflow-y: scroll;
 text-rendering: optimizeLegibility;
 text-size-adjust: 100%;
+scroll-behavior: smooth;
 }
 *{
 margin: 0;
@@ -158,9 +159,7 @@ body{
     }
 }
 .main {
-    // overflow: hidden;
     padding-top: calc(var(--header-height) + 1rem);
-
     .page-title {
         font-size: var(--bigger-fz);
         color: var(--white-color);
@@ -217,4 +216,18 @@ body{
 }
 .bg-pink {
     background: var(--green-color);
+}
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    .column {
+        flex: 1;
+    }
+
+    .text-right {
+        text-align: right;
+        justify-content: flex-end;
+    }
 }

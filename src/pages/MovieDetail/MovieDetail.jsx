@@ -6,8 +6,10 @@ import Loading from '../../components/Loading/Loading'
 import GenreSelectData from '../../components/Select/GenreSelectData'
 import formatDate from '../../utils/formatDate'
 import createSlug from '../../utils/slug'
+import imgNull from '../../assets/images/user-none.png'
 import './MovieDetail.scss'
 import Cast from './Cast'
+import Trailer from './Trailer'
 
 const MovieDetail = props => {
     const {onGenreClick, getMovieName} = props
@@ -130,7 +132,11 @@ const MovieDetail = props => {
                         <div className="detail-sticky">
                             <div className="detail-media">
                                 <div className="detail-media-img">
+                                    { 
+                                    movie.poster_path ? 
                                     <img src={`https://image.tmdb.org/t/p/w342/${movie.poster_path}`} alt="" className="detail-img" />
+                                    : <img src={imgNull} alt="" /> 
+                                    }
                                 </div>
                                 <Link to={`/watch-${type}/${createSlug(movie.title || movie.name)}~${movie.id}`} 
                                     onClick={getMovieName(movie.title || movie.name,movie.original_title || movie.original_name )}
@@ -164,13 +170,13 @@ const MovieDetail = props => {
                                     <i class='bx bxl-facebook-square'></i><span>Chia sẻ</span>
                                 </div>
                                 {
-                                    isStored ? <div className="btn-custom btn-collection added" 
+                                    isStored ? <div className="btn-collection added" 
                                                 onClick={() => 
                                                 handleCollectionClick(Number(id), type, movie.title || movie.name,movie.original_title || movie.original_name,movie.poster_path)}>
                                                 <i class='bx bx-check'></i> <span>Đã lưu vào bộ sưu tập</span>
                                             </div> 
                                     : 
-                                            <div className="btn-custom btn-collection" 
+                                            <div className="btn-collection" 
                                                 onClick={() => handleCollectionClick(Number(id), type, movie.title || movie.name,movie.original_title || movie.original_name,movie.poster_path)}>
                                                 <i class='bx bx-plus'></i> <span>Bộ sưu tập</span>
                                             </div>
@@ -211,6 +217,10 @@ const MovieDetail = props => {
                             <div className="cast">
                                 <h3>Diễn viên</h3>
                                 <Cast id={Number(id)} type={String(type)}  />
+                            </div>
+                            <div className="trailer">
+                                <h3>Videos</h3>
+                                <Trailer id={Number(id)} type={String(type)}  />
                             </div>
                         </div>
                     </div>

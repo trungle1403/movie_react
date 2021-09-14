@@ -10,8 +10,9 @@ const createSlug = (value) => {
     slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
     slug = slug.replace(/đ/gi, 'd');
     //Xóa các ký tự đặt biệt
-    slug = slug.replace(/ /gi,"-")
-    slug = slug.replace(/[^\w-]+/gi,"")
+    slug = slug.replace(/-|\|~|`|!|@|#|%|&|:|"|'|;|,|{|}|]|/gi, '');
+    slug = slug.replace(/ /gi,"-");
+    // slug = slug.replace(/[^\w-]+/gi,"")
     return slug;
 }
 export default createSlug;

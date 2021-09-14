@@ -7,6 +7,7 @@
     border-radius: 4px;
     font-size: var(--normal-fz);
     cursor: pointer;
+    transition: .3s linear;
 }
 .btn-flex {
     display: flex;
@@ -18,16 +19,50 @@
     }
 }
 .btn-blue {
-    background: var(--blue-color);
+    color: var(--blue-color);
+    border: 1px solid var(--blue-color);
+    &:hover {
+        background: var(--blue-color);
+        color: #fff;
+    }
 }
 
 .btn-red {
-    background: var(--red-color);
+    color: var(--red-color);
+    border: 1px solid var(--red-color);
+    &:hover {
+        background: var(--red-color);
+        color: #fff;
+    }
 }
 
 .btn-green {
-    background: var(--green-color);
+    color: var(--green-color);
+    border: 1px solid var(--green-color);
+    &:hover {
+        background: var(--green-color);
+        color: #fff;
+    }
 }
 .btn-pink {
-    background: var(--green-color);
+    color: var(--pink-color);
+    border: 1px solid var(--pink-color);
+    &:hover {
+        background: var(--pink-color);
+        color: #fff;
+    }
+}
+
+.btn-share-fb {
+    padding: 10px  15px;;
+    display: inline-flex;
+    align-items: center;
+    gap: 0 5px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    i {
+        font-size: var(--big-fz);
+    }
+}
+.btn-share-fb{
+    background: var(--blue-color);
 }

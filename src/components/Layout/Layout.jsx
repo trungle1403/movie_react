@@ -1,8 +1,6 @@
 import React, {useState} from 'react'
 import Header from '../Header/Header'
-// import Footer from '../Footer/Footer'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-
 import Home from '../../pages/Home/Home'
 import Movie from '../../pages/Movie/Movie'
 import Show from '../../pages/Show/Show'
@@ -46,10 +44,9 @@ const Layout = () => {
                             <MovieDetail getMovieName={getMovieName} />
                         </Route>
                         <Route exact path="/watch-:type/:slug~:id">
-                        <Watch name={movieName} subName={movieSubName} />
+                            <Watch name={movieName} subName={movieSubName} />
                         </Route>
                     </Switch>
-                    {/* <Footer /> */}
                 </div>
             )} />
         </Router>

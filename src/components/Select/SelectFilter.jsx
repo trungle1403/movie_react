@@ -13,7 +13,6 @@ const SelectFilter = props => {
     const {onGenreChange, onCountryChange, onYearChange, onRuntimeChange, onSortChange,
                 getYear, getCountry, getGenre, getSort, getRuntime, onDisplayChange} = props
     
-                // console.log(onDisplayChange)
     const optionGenre = GenreSelectData()
     let genreSelected = optionGenre.findIndex(i => i.value === Number(getGenre))
 
@@ -25,9 +24,7 @@ const SelectFilter = props => {
 
     const optionRuntime = RuntimeSelectData()
     let runtimeSelected = optionRuntime.findIndex(i => i.value === Number(getRuntime))
-    // console.log(runtimeSelected)
 
-    //mac dinh la sort do pho bien vi tri index 0
     let sortSelected = 0
     const optionSort = SortSelectData()
     // neu co thay doi sort tu handle thi doi sortSelected
@@ -76,9 +73,15 @@ const SelectFilter = props => {
         }
     }
 
+    const filterShowRef = useRef(null)
+    const overlayShowRef = useRef(null)
+    const handleShowFilter = () => {
+        filterShowRef.current.classList.toggle("active")
+        overlayShowRef.current.classList.toggle("active")
+    }
     return (
         <div className="container">
-            <div className="filter-list">
+            <div className="filter-list" ref={filterShowRef}>
                 <div className="filter-item">
                     <label className="filter-label">
                         Thể loại:
@@ -149,7 +152,14 @@ const SelectFilter = props => {
                         </div>
                     </div>
                 </div>
+                <div className="btn-filter-close" onClick={() => handleShowFilter()}>
+                    <i class='bx bx-chevrons-left'></i>
+                </div>
             </div>
+            <div className="btn-filter-show" onClick={() => handleShowFilter()}>
+                <i class='bx bx-slider' ></i>
+            </div>
+            <div className="filter-overlay" ref={overlayShowRef} onClick={() => handleShowFilter()}></div>
         </div>
     )
 }

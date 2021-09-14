@@ -4,7 +4,7 @@ import Helmet from '../../components/Helmet'
 import Loading from '../../components/Loading/Loading'
 import SectionMovie from '../../components/SectionMovie/SectionMovie.jsx'
 
-const Home = props => {
+const Home = () => {
 
     const [movieRecommend, setMovieRecommend] = useState([])
     const [movie, setMovie] = useState([])

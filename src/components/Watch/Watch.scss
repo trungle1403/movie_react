@@ -14,22 +14,41 @@
     }
     &-name {
         font-size: var(--bigger-fz);
-        color: var(--green-color);
         font-weight: 600;
         margin-bottom: 10px;
         text-transform: uppercase;
     }
     &-subname {
         font-size: var(--big-fz);
-        margin-bottom: 10px;
+        margin-bottom: 15px;
         color: var(--text-second-color);
     }
+    .btn-custom {
+        margin-bottom: 15px;
+    }
+    .btn-back {
+        margin-left: auto;
+        cursor: pointer;
+        gap: 0 5px;
+        width: fit-content;
+        &:hover {
+            color: var(--blue-color);
+        }
+    }
+    
 }
 
 @media screen and (max-width: 768px) {
     .video {
         &-screen {
             height: 50vh;
+        }
+    }
+    .row {
+        flex-direction: column;
+        gap: 20px 0;
+        .column {
+            width: 100%;
         }
     }
 }

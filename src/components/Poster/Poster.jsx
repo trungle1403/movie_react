@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import formatDate from '../../utils/formatDate'
 import createSlug from '../../utils/slug'
+import imgNull from '../../assets/images/user-none.png'
 import GenreSelectData from '../Select/GenreSelectData'
 import './Poster.scss'
 
@@ -47,7 +48,10 @@ const Poster = props => {
                             <div key={index} className="movie-item">
                                 <div className="content-left">
                                     <Link to={`/${type}/${createSlug(item.title || item.name)}/${item.id}`} className="movie-media">
-                                        <img src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} alt="" className="movie-poster" />
+                                        { 
+                                        item.poster_path ? <img src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} alt="" className="movie-poster" />
+                                        : <img src={imgNull} alt="" className="movie-poster" /> 
+                                        }
                                     </Link>
                                 </div>
                                 <div className="content-right">
@@ -97,7 +101,10 @@ const Poster = props => {
                         movieData.map((item, index) => (
                             <div key={index} className="movie-item">
                                 <Link to={`/${type}/${createSlug(item.title || item.name)}/${item.id}`}className="movie-media">
-                                    <img src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} alt="" className="movie-poster" />
+                                    { 
+                                    item.poster_path ? <img src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} alt="" className="movie-poster" />
+                                    : <img src={imgNull} alt="" className="movie-poster" /> 
+                                    }
                                 </Link>
                                 <Link to={`/${type}/${createSlug(item.title || item.name)}/${item.id}`}  className="movie-link movie-title">{item.title || item.name}</Link>
                                 <Link to={`/${type}/${createSlug(item.title || item.name)}/${item.id}`}  className="movie-link movie-subtitle">

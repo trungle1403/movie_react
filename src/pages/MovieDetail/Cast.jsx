@@ -5,6 +5,7 @@ import Loading from '../../components/Loading/Loading';
 import imgNull from '../../assets/images/user-none.png'
 import createSlug from '../../utils/slug'
 import './Cast.scss'
+
 const Cast = props => {
     const {id, type} = props
     const [cast, setCast] = useState([])
@@ -30,7 +31,7 @@ const Cast = props => {
       loading ? 
       <div className="cast-list">
         {
-        cast.map((item, index) => (
+          cast.map((item, index) => (
             <div key={index} className="cast-item">
                 <Link to={`/actor/${createSlug( item.name)}~${item.id}`} className="cast-media">
                     <figure>
@@ -41,9 +42,8 @@ const Cast = props => {
                     
                     </figure>
                 </Link>
-                <p  to={`/actor`} 
-                className="cast-name">{item.name}</p>
-                <p className="cast-character">{item.character}</p>
+                <div className="cast-name">{item.name}</div>
+                <div className="cast-character">{item.character}</div>
             </div>
           ))
         }

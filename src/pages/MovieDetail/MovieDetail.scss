@@ -148,18 +148,19 @@
             color: var(--white-color);
         }
     }
-    .btn-share-fb,.btn-collection {
+    .btn-collection {
         padding: 10px  15px;;
         display: inline-flex;
+        width: fit-content;
         align-items: center;
+        cursor: pointer;
         gap: 0 5px;
+        color: #fff;
+        border-radius: 4px;
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         i {
             font-size: var(--big-fz);
         }
-    }
-    .btn-share-fb{
-        background: var(--blue-color);
     }
     .btn-collection {
         background: var(--green-color);

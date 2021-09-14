@@ -1,11 +1,11 @@
 import React, { useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
-import { useParams } from 'react-router'
+import { Link, useParams } from 'react-router-dom'
 import Loading from '../Loading/Loading'
 import './Watch.scss'
 const Watch = props => {
     const {name, subName} = props
-    const {id,type} = useParams()
+    const {id, type, slug} = useParams()
     const [movie, setMovie] = useState([])
     const [loading, setLoading] = useState(true)
     useEffect(() => {
@@ -50,6 +50,16 @@ const Watch = props => {
                     <div className="column">
                         <div className="video-name">{name ? name : ""}</div>
                         <div className="video-subname">{subName ? subName : ""}</div>
+                        <a href={` https://www.facebook.com/dialog/share?app_id=87741124305&href=https%3A%2F%2Fyoutube.com%2Fwatch%3Fv%${keyList[0]}%26feature%3Dshare&display=popup`} target="_blank" rel="noreferrer"className="btn-custom btn-share-fb">
+                            <i class='bx bxl-facebook-square'></i><span>Chia sẻ</span>
+                        </a>
+                    </div>
+                    <div className="column text-right">
+                        <div className="btn-custom btn-green">Giao diện học tiếng Anh</div>
+                        <Link to={`/${type}/${slug}/${id}`} className="btn-back btn-flex">
+                            <i class='bx bx-share'></i>
+                            <span>Trở về trang giới thiệu phim</span>
+                        </Link>
                     </div>
                 </div>
             </div>

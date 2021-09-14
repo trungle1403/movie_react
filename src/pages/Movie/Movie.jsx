@@ -99,7 +99,7 @@ const Movie = props => {
                 let {results} = data
                 const total_page = data.total_pages
 
-                results = results.filter( i => i.poster_path !== null)
+                // results = results.filter( i => i.poster_path !== null)
                 setLimitPage(results.length)                
                 setMovie(results)
                 setTotalPage(total_page)
