@@ -1,15 +1,15 @@
 import React,{ useEffect, useState, useRef} from 'react'
-import './Search.scss'
 import Poster from '../../components/Poster/Poster'
 import Pagination from '../../components/Pagination/Pagination'
-import Select from 'react-select'
 import Helmet from '../../components/Helmet'
+import './Search.scss'
+import Select from 'react-select'
+
 const Search = props => {
-    // console.log(getMovie)
     const [input, setInput] = useState("")
     const [movieData, setMovieData] = useState([])
-    const typingHandleRef = useRef(null)
     const [optionsData, setOptionsData] = useState("movie")
+    const typingHandleRef = useRef(null)
     const [filters, setFilters] = useState({
         page: 1
     })
@@ -32,15 +32,11 @@ const Search = props => {
                 const response = await fetch(URL)
                 const data = await response.json()
                 let {results} = data;
-                results = results.filter( i => i.poster_path !== null)
                 setMovieData(results)
-                const total_page = data.total_pages
-                setTotalPage(total_page)
-                // setTotal({...total, totalMovie: results });
+                setTotalPage(data.total_pages)
             }catch(e){
                 console.log("fetch failed: " + e.message)
             }
-            
         }
         fetchMovie(input)
     }, [input,optionsData,filters])

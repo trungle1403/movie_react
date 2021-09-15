@@ -78,8 +78,10 @@ const MovieDetail = props => {
     useEffect(() => {
         if(type === "movie"){
             localStorage.setItem("movie-storage",JSON.stringify(movieStored))
-        }else{
+        }else if (type === "tv"){
             localStorage.setItem("tv-storage",JSON.stringify(movieStored))
+        }else{
+            return;
         }
         const temp = [...movieStored]
         let num = 0
@@ -138,7 +140,8 @@ const MovieDetail = props => {
                                     : <img src={imgNull} alt="" /> 
                                     }
                                 </div>
-                                <Link to={`/watch-${type}/${createSlug(movie.title || movie.name)}~${movie.id}`} 
+                                <Link 
+                                    to={`/watch-${type}/${movie.id}/${createSlug(movie.title || movie.name)}`} 
                                     onClick={getMovieName(movie.title || movie.name,movie.original_title || movie.original_name )}
                                 className='btn-custom btn-view'> <i class='bx bx-play'></i> 
                                 <span>Xem phim</span></Link>

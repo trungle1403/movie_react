@@ -3,10 +3,13 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 25px 20px;
 }
-
+.movie-item {
+    display: flex;
+    flex-direction: column;
+}
 .movie-media {
     display: inline-block;
-    margin-bottom: .3rem;
+    margin-bottom: .5rem;
     height: 400px;
 }
 
@@ -30,6 +33,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     word-break: break-word;
+    margin-top: auto;
 }
 .movie-subtitle {
     font-size: var(--normal-fz);
@@ -48,6 +52,7 @@
 
     .movie-item {
         display: flex;
+        flex-direction: unset;
         gap: 0 30px;
         padding: 10px 0;
         border-bottom: 1px solid var(--silver-gray-color);

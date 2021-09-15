@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Link, useParams } from 'react-router-dom'
 import Loading from '../Loading/Loading'
 import './Watch.scss'
+import Comment from './Comment'
 const Watch = props => {
     const {name, subName} = props
     const {id, type, slug} = useParams()
@@ -17,7 +18,6 @@ const Watch = props => {
                 const results = data.results;
                 setMovie(results)
                 setLoading(false)
-                console.log(data)
             }catch(e){
                 console.log("failed to fetch movie watch: ", e.message);
             }
@@ -56,11 +56,24 @@ const Watch = props => {
                     </div>
                     <div className="column text-right">
                         <div className="btn-custom btn-green">Giao diện học tiếng Anh</div>
-                        <Link to={`/${type}/${slug}/${id}`} className="btn-back btn-flex">
+                        <Link to={`/${type}/${id}~${slug}`} className="btn-back btn-flex">
                             <i class='bx bx-share'></i>
                             <span>Trở về trang giới thiệu phim</span>
                         </Link>
+                    </div>                 
+                </div>
+                <div className="video-alert">
+                    <p>Nếu phim load chậm, bạn có thể kích hoạt VIP Mode cho phim này để xem với server tốc độ cao</p>
+                    <div className="btn-vip">
+                        Kích hoạt VIP mode
                     </div>
+                </div>
+                <div className="comment">
+                    <div className="comment-title">
+                        <i class='bx bx-conversation'></i>
+                        <span>Bình luận phim</span>
+                    </div>
+                    <Comment />
                 </div>
             </div>
         </main>

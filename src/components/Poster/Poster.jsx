@@ -47,7 +47,7 @@ const Poster = props => {
                         movieData.map((item, index) => (
                             <div key={index} className="movie-item">
                                 <div className="content-left">
-                                    <Link to={`/${type}/${createSlug(item.title || item.name)}/${item.id}`} className="movie-media">
+                                    <Link to={`/${type}/${item.id}~${createSlug(item.title || item.name)}`} className="movie-media">
                                         { 
                                         item.poster_path ? <img src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} alt="" className="movie-poster" />
                                         : <img src={imgNull} alt="" className="movie-poster" /> 
@@ -57,8 +57,8 @@ const Poster = props => {
                                 <div className="content-right">
                                     <div className="content-row">
                                         <div className="content-column">
-                                            <Link to={`/${type}/${createSlug(item.title || item.name)}/${item.id}`}  className="movie-link movie-title">{item.title || item.name}</Link>
-                                            <Link to={`/${type}/${createSlug(item.title || item.name)}/${item.id}`}  className="movie-link movie-subtitle">
+                                            <Link to={`/${type}/${item.id}~${createSlug(item.title || item.name)}`}  className="movie-link movie-title">{item.title || item.name}</Link>
+                                            <Link to={`/${type}/${item.id}~${createSlug(item.title || item.name)}`}  className="movie-link movie-subtitle">
                                                 {item.original_title || item.original_name}</Link>
                                         </div>
                                         <div className="content-column">
@@ -100,14 +100,14 @@ const Poster = props => {
                     {
                         movieData.map((item, index) => (
                             <div key={index} className="movie-item">
-                                <Link to={`/${type}/${createSlug(item.title || item.name)}/${item.id}`}className="movie-media">
+                                <Link to={`/${type}/${item.id}~${createSlug(item.title || item.name)}`}className="movie-media">
                                     { 
                                     item.poster_path ? <img src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} alt="" className="movie-poster" />
                                     : <img src={imgNull} alt="" className="movie-poster" /> 
                                     }
                                 </Link>
-                                <Link to={`/${type}/${createSlug(item.title || item.name)}/${item.id}`}  className="movie-link movie-title">{item.title || item.name}</Link>
-                                <Link to={`/${type}/${createSlug(item.title || item.name)}/${item.id}`}  className="movie-link movie-subtitle">
+                                <Link to={`/${type}/${item.id}~${createSlug(item.title || item.name)}`}  className="movie-link movie-title">{item.title || item.name}</Link>
+                                <Link to={`/${type}/${item.id}~${createSlug(item.title || item.name)}`}  className="movie-link movie-subtitle">
                                     {item.original_title || item.original_name}</Link>
                             </div>
                         ))

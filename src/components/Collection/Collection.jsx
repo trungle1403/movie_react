@@ -30,7 +30,7 @@ const Collection = props => {
                         <h1 className="page-title">Phim lẻ</h1>
                     </div>
                     {
-                        movieStored.length !== 0 ? <Poster type={"movie"} movieData={movieStored} />
+                        movieStored && movieStored.length !== 0 ? <Poster type={"movie"} movieData={movieStored} />
                         : <div className="container">
                             <div className="collection-note">Bạn chưa thêm phim nào vào danh sách này</div>
                         </div>
@@ -44,7 +44,7 @@ const Collection = props => {
                 </div>
                 <div className="collection-wrapper">
                     {
-                        tvStored.length !== 0 ? <Poster type={"tv"} movieData={tvStored}  />
+                        tvStored && tvStored.length !== 0 ? <Poster type={"tv"} movieData={tvStored}  />
                         : <div className="container">
                             <div className="collection-note">Bạn chưa thêm phim nào vào danh sách này</div>
                         </div>

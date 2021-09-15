@@ -1,0 +1,31 @@
+.footer {
+    background: var(--bg-light-color);
+    height:var(--header-height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: var(--small-fz);
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    &-title {
+        margin-bottom: 3px;
+        display: flex;
+        align-items: center;
+        gap: 0 5px;
+        i {
+            color: var(--white-color);
+        }
+        a {
+            display: flex;
+            align-items: center;
+            gap: 0 3px;
+            font-weight: bold;
+            color: var(--green-color);
+        }
+    }
+    &-subtitle {
+        font-style: italic;
+    }
+}

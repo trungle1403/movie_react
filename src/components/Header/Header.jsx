@@ -80,7 +80,7 @@ const Header = () => {
                     <ul className="nav-list" ref={navRef}>
                         {
                             mainNav.map( (item,index) => (
-                                <li key={index} className="nav-item">
+                                <li key={index} className="nav-item" onClick={() => navToggle()}>
                                     <Link  className={`nav-link ${index === activeNav ? 'active' : ''}`} to={item.path} >
                                         {item.display}
                                     </Link>
@@ -91,7 +91,7 @@ const Header = () => {
                             <i class='bx bxs-chevrons-right'></i>
                         </li>
                         <div className="nav-active-hidden">
-                            <Link to='/collection' className='btn-custom nav-collection'>
+                            <Link to='/collection' onClick={() => navToggle()} className='btn-custom nav-collection'>
                             <i class='bx bx-add-to-queue'></i> <span>Bộ sưu tập</span></Link>
                         </div>
                     </ul>

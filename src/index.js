@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
-
 import Layout from './components/Layout/Layout'
 import './sass/index.scss';
 import './assets/boxicons-master/css/boxicons.min.css'
