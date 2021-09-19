@@ -17,16 +17,6 @@ import getRuntimeParams from '../../utils/getRuntimeParams'
 //lib
 import queryString from 'query-string'
 
-const createParams = (obj, history, params) => {
-    //delete item null
-    for(let key in obj){
-        if(obj[key] === ""){
-            delete obj[key]
-        }
-    }
-    //set params or not
-    history.push(`?${queryString.stringify(params)}`);
-}
 const Movie = props => {
     const [movie, setMovie] = useState([])
     const [limitPage, setLimitPage] = useState(20)
@@ -34,9 +24,6 @@ const Movie = props => {
 
     const [loading, setLoading] = useState(true)
     const [display, setDisplay] = useState("grid")
-
-    // const displayRef = useRef(null)
-    const history = useHistory()
 
     //get params => neu co reload trang van thi lay params de thay vao state
     const getPage = getPageParams()
@@ -67,19 +54,23 @@ const Movie = props => {
     if(getRuntime != null){
         initialRuntime = getRuntime
     }
-    //state de tao slug params
-    const [params, setParams] = useState({
+    let initialPage = 1
+    if(getPage > 0){
+        initialPage = getPage
+    }
+
+    // slug params
+    const params = {
         genre: initialGenre,
         country: initialCountry,
         year: initialYear,
-        page: getPage,
         runtime: initialRuntime,
-        sort_by: initialSort
-    })
-    // console.log('params',params)
+        sort_by: initialSort,
+        page: initialPage,
+    }
     
     const [filters, setFilters] = useState({
-        page: getPage, // dua vao params
+        page: initialPage,
         with_genres: initialGenre,
         with_original_language: initialCountry,
         primary_release_year: initialYear,
@@ -93,19 +84,16 @@ const Movie = props => {
         const fetchMovie = async (specify) => {
             try {
                 const paramsString = `page=${filters.page}&with_genres=${filters.with_genres}&with_original_language=${filters.with_original_language}&primary_release_year=${filters.primary_release_year}&with_runtime.${runTimeOtherBy}=${filters.with_runtime}&sort_by=${filters.sort_by}`
+
                 const URL = `https://api.themoviedb.org/3/discover/${specify}?api_key=5761f00d4efd80b92ba2496773204780&language=vi&${paramsString}`;
                 const response = await fetch(URL)
                 const data = await response.json()
                 let {results} = data
-                const total_page = data.total_pages
 
-                // results = results.filter( i => i.poster_path !== null)
-                setLimitPage(results.length)                
                 setMovie(results)
-                setTotalPage(total_page)
+                setLimitPage(results.length)                
+                setTotalPage(data.total_pages)
                 setLoading(false)
-                // console.log('phim le: ', results)
-                // console.log('trang: ', filters.page)
             }catch (e) {
                 console.log(e.message)
             }
@@ -113,45 +101,42 @@ const Movie = props => {
         fetchMovie("movie")
     }, [filters,runTimeOtherBy])
 
-    const handlePageChange = (newPage) => {
-        // console.log('phim le: ', newPage)
-        setParams({...params, page: newPage})
-        params.page = newPage
-        createParams(params, history, params)
+    const history = useHistory()
+    const createParams = (obj) => {
+        //delete item null
+        for(let key in obj){
+            if(obj[key] === ""){
+                delete obj[key]
+            }
+        }
+        //set params or not
+        history.push(`?${queryString.stringify(obj)}`);
+    }
 
+    const handlePageChange = (newPage) => {
+        params.page = newPage
+        createParams(params)
         setFilters({...filters, page: newPage})
     }
     const handleGenreChange = (genreSelect) => {
-        // genre is obj
         const value = genreSelect.value
-        setParams({...params, page: 1, genre: value})
-
         params.genre = value
         params.page = 1
-        createParams(params, history, params)
-
-        //reset param
+        createParams(params)
         setFilters({...filters, page: 1,  with_genres: value})
     }
     const handleCountryChange = (countrySelect) => {
         const value = countrySelect.value
-        //reset param
         params.country = value
-        setParams({...params, page: 1, country: value})
-
         params.page = 1
-        createParams(params, history, params)
-
+        createParams(params)
         setFilters({...filters, page: 1,  with_original_language: value})
     }
     const handleYearChange = (yearSelect) => {
         const value = yearSelect.value
-        setParams({...params, page: 1, year: value})
-        //reset param
         params.page = 1
         params.year = value
-        createParams(params, history, params)
-
+        createParams(params)
         setFilters({...filters, page: 1,  primary_release_year: value})
     }
     const handleRuntimeChange = (runtimeSelect) => {
@@ -164,28 +149,22 @@ const Movie = props => {
         }else{
             setrunTimeOtherBy("lte")
         }
-        setParams({...params, page: 1, runtime: value})
         //reset param
         params.page = 1
         params.runtime = value
-        createParams(params, history, params)
-
+        createParams(params)
         setFilters({...filters, page: 1,  with_runtime: value})
     }
     const handleSortChange = (sortSelect) => {
         let value = sortSelect.value
-        
-        setParams({...params, page: 1, sort_by: value})
         //reset param
         params.page = 1
         params.sort_by = value
-        createParams(params, history, params)
-
+        createParams(params)
         setFilters({...filters, page: 1,  sort_by: value})
     }
 
     const handleDisplayChange = (display) => {
-        // console.log(display)
         setDisplay(display)
     }
 

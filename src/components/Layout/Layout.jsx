@@ -28,7 +28,7 @@ const Layout = () => {
                         <Route path='/type/movie'>
                             <Movie />
                         </Route>
-                        <Route path='/type/show'>
+                        <Route path='/type/tv'>
                             <Show />
                         </Route>
                         <Route exact path="/">

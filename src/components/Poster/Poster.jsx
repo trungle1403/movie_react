@@ -40,15 +40,18 @@ const Poster = props => {
         )
     }
     if(display === "list"){
+        
         return (
             <div className="container">
                 <div className="movie-list display-list">
                     {
                         movieData.map((item, index) => (
+                            
                             <div key={index} className="movie-item">
                                 <div className="content-left">
                                     <Link to={`/${type}/${item.id}~${createSlug(item.title || item.name)}`} className="movie-media">
                                         { 
+                                        
                                         item.poster_path ? <img src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} alt="" className="movie-poster" />
                                         : <img src={imgNull} alt="" className="movie-poster" /> 
                                         }
@@ -70,7 +73,8 @@ const Poster = props => {
                                                 </span>
                                                 <span className="movie-score">{item.vote_average}</span>
                                             </div>
-                                            <p className="movie-date text-right">{formatDate(item.release_date)}</p>
+                                            <p className="movie-date text-right">
+                                                {formatDate(item.release_date || item.first_air_date)}</p>
                                         </div>
                                     </div>
                                     <p className="text movie-overview">

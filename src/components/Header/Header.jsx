@@ -13,7 +13,7 @@ const mainNav = [
     },
     {
         display: 'Phim Bộ',
-        path: '/type/show'
+        path: '/type/tv'
     },
     {
         display: 'Tìm kiếm',

@@ -35,15 +35,19 @@ color:unset;
 li {
     list-style: none;
 }
-// a:hover{
-//     color: $main-color
-// }
 img {
 display: block;
 max-width: 100%;
 }
 select {
     color: var(--black-color);
+}
+::-webkit-scrollbar {
+    width: 0.6rem;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #27292a;
+    border-radius: 0.5rem;
 }
 body{
     font-family: var(--primary-font);

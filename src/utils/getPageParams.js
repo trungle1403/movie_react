@@ -3,7 +3,6 @@ const getPageParams = () => {
     const search = window.location.search;
     const params = new URLSearchParams(search);
     let getPage = Number(params.get('page'));
-    // console.log(getPage)
     if(getPage === 0) {
         getPage = 1;
     }

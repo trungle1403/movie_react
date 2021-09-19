@@ -11,13 +11,13 @@ const Movie = props => {
                 movieData.map((item,index) => (
                     <div key={index} className="specify-item">
                         <Link 
-                            to={`/${type}/${createSlug(item.title || item.name)}/${item.id}`}
+                            to={`/${type}/${item.id}~${createSlug(item.title || item.name)}`}
                             className="specify-media"
                         >
                             { item.poster_path === null ? <img src={imgNull} alt="" />: <img src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} alt="" />}
                         </Link>
                         <Link 
-                            to={`/${type}/${createSlug(item.title || item.name)}/${item.id}`}
+                            to={`/${type}/${item.id}~${createSlug(item.title || item.name)}`}
                             className="specify-name"
                         >
                             {item.name || item.title}

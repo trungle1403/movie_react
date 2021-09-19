@@ -11,7 +11,7 @@ import SortSelectData from './SortSelectData'
 
 const SelectFilter = props => {
     const {onGenreChange, onCountryChange, onYearChange, onRuntimeChange, onSortChange,
-                getYear, getCountry, getGenre, getSort, getRuntime, onDisplayChange} = props
+                getYear, getCountry, getGenre, getSort, getRuntime, onDisplayChange, type} = props
     
     const optionGenre = GenreSelectData()
     let genreSelected = optionGenre.findIndex(i => i.value === Number(getGenre))
@@ -115,6 +115,7 @@ const SelectFilter = props => {
                         value={optionYear[yearSelected]}
                     />
                 </div>
+                {type !== "tv" &&
                 <div className="filter-item">
                     <label className="filter-label">
                         Thời lượng:
@@ -126,6 +127,7 @@ const SelectFilter = props => {
                         value={optionRuntime[runtimeSelected]}
                     />
                 </div>
+                }
                 <div className="filter-item">
                     <label className="filter-label">
                         Sắp xếp:
@@ -134,7 +136,6 @@ const SelectFilter = props => {
                         defaultValue={optionSort[sortSelected]} 
                         options={optionSort} 
                         onChange={handleSortChange}
-                        value={optionSort[sortSelected]}
                     />
                 </div>
                 <div className="filter-item">
@@ -176,6 +177,7 @@ SelectFilter.propTypes = {
     getSort: PropTypes.string,
     getRuntime: PropTypes.string,
     onDisplayChange: PropTypes.func,
+    type: PropTypes.string,
 }
 SelectFilter.defaultProps = {
     onGenreChange: null,
@@ -189,6 +191,7 @@ SelectFilter.defaultProps = {
     getSort: null,
     getRuntime: null,
     onDisplayChange: null,
+    type: null,
 }
 
 export default SelectFilter
